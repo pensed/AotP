@@ -1,10 +1,10 @@
 --회원 테이블 생성
 CREATE TABLE MEMBERS(
-            MM_ID VARCHAR2(20) NOT NULL PRIMARY KEY,
+            MM_ID VARCHAR2(20) UNIQUE NOT NULL PRIMARY KEY,
             MM_PW NUMBER NOT NULL,
             MM_NAME VARCHAR2(20),
-            MM_RRNUM NUMBER NOT NULL,
-            MM_PHNUM NUMBER NOT NULL
+            MM_RRNUM NUMBER UNIQUE NOT NULL,
+            MM_PHNUM NUMBER UNIQUE NOT NULL
             );
 --회원 테이블 칼럼 작성
 INSERT INTO MEMBERS VALUES('abc1', 1234, '떡튀순', 1111111111111, 0101111111);
@@ -17,7 +17,7 @@ SELECT * FROM MEMBERS;
 ----------------------------------------------------------------------------------------------------
 --쿠폰 테이블 생성
 CREATE TABLE COUPONS(
-            CP_NAME VARCHAR2(20) NOT NULL PRIMARY KEY,
+            CP_NAME VARCHAR2(20) UNIQUE NOT NULL PRIMARY KEY,
             CP_PERCENT NUMBER NOT NULL
             );
 --쿠폰 테이블 칼럼 작성
@@ -31,7 +31,7 @@ SELECT * FROM COUPONS;
 ----------------------------------------------------------------------------------------------------
 --쿠폰 보고나함 테이블 생성
 CREATE TABLE CPLIST(
-            MM_ID VARCHAR2(20) NOT NULL,
+            MM_ID VARCHAR2(20) UNIQUE NOT NULL,
             CP_NAME  VARCHAR2(20) NOT NULL,
             FOREIGN KEY (MM_ID) REFERENCES MEMBERS(MM_ID),
             FOREIGN KEY (CP_NAME) REFERENCES COUPONS(CP_NAME)
@@ -49,7 +49,7 @@ SELECT * FROM CPLIST;
 --상품 테이블 생성
 DROP TABLE PRODUCTS;
 CREATE TABLE PRODUCTS(
-            PD_NUM NUMBER NOT NULL PRIMARY KEY,
+            PD_NUM NUMBER NOT NULL UNIQUE PRIMARY KEY,
             PD_CTG VARCHAR2(20) NOT NULL,
             PD_NAME VARCHAR2(20) NOT NULL,
             PD_INF VARCHAR2(20) NOT NULL,
@@ -64,7 +64,7 @@ SELECT * FROM PRODUCTS;
 ----------------------------------------------------------------------------------------------------
 --주문 테이블 생성
 CREATE TABLE ORDERS(
-            OD_NUM NUMBER NOT NULL PRIMARY KEY,
+            OD_NUM NUMBER UNIQUE NOT NULL PRIMARY KEY,
             MM_ID VARCHAR2(20) NOT NULL,
             OD_ADD VARCHAR2(20) NOT NULL,
             OD_DATE DATE NOT NULL,
